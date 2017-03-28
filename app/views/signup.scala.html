@@ -1,0 +1,41 @@
+@(signupForm: Form[models.users.Signup], user: models.users.User)
+@import helper._
+
+@* Pass page title and content {html between braces} to the main view *@
+@main("Signup", user) {
+  @if(flash.containsKey("success")) {
+              <div class="alert alert-success">
+              @flash.get("success")
+              </div>
+          }
+    <div class="col-sm-12">
+    <h3>Signup</h3>
+
+         @form(action = security.routes.SignupController.signupSubmit(), 'class -> "form-horizontal", 'role ->"form") {
+        <div class="form-group">
+        @inputText(signupForm("name"), '_label -> "",'class -> "form-control input-xs", 'placeholder -> "Name")
+        </div>
+        <div class="form-group">
+        @inputText(signupForm("email"), '_label -> "",'class -> "form-control input-xs", 'placeholder -> "Email")
+        </div>
+         <div class="form-group">
+        @inputText(signupForm("password"), '_label -> "",'class -> "form-control input-xs", 'placeholder -> "Password")
+        </div>
+        <div class="form-group">
+        @inputText(signupForm("address"), '_label -> "",'class -> "form-control input-xs", 'placeholder -> "Address")
+        </div>
+
+      <div class="actions">
+          <input type="submit" value=" Create Account " class="btn btn-primary">
+          <a href="@controllers.security.routes.LoginController.login()"></a>
+          <input type="submit" value="Cancel" class="btn btn-warning">
+          <a href="@controllers.security.routes.LoginController.login()"></a>
+    </div>          
+
+    <br>
+    <br>
+        }
+  
+</div>
+  <!-- End of content for main -->
+}
